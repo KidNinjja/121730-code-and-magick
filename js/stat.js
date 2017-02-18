@@ -48,7 +48,7 @@
     var histogramColumnHeight = 150;
     var histogramStepHeight = histogramColumnHeight / maxTimePlayerCount;
     var histogramColumnOffset = 50;
-    var histogramColumnMarkColor = 'rgba(0, 0, 255, 1)';
+    var histogramColumnMarkColor = 'rgba(255, 0, 0, 1)';
     var histogramColumnStartPositionX = 120;
 
     for (var c = 0; c < times.length; c++) {
@@ -60,23 +60,17 @@
 
       if (currentName === 'Вы') {
         ctx.fillStyle = histogramColumnMarkColor;
-        ctx.fillRect(histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD - currentHeight - 16, histogramColumnWidth, currentHeight);
-        ctx.fillStyle = '#000';
-        ctx.font = '16px PT Mono';
-        ctx.fillText(Math.floor(currentTime), histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD - currentHeight - 20);
-        ctx.fillStyle = '#000';
-        ctx.font = '16px PT Mono';
-        ctx.fillText(currentName, histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD);
       } else {
         ctx.fillStyle = 'rgba(0, 0 , 255, 0.' + getRandomInteger(1, 9) + ')';
-        ctx.fillRect(histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD - currentHeight - 16, histogramColumnWidth, currentHeight);
-        ctx.fillStyle = '#000';
-        ctx.font = '16px PT Mono';
-        ctx.fillText(Math.floor(currentTime), histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD - currentHeight - 20);
-        ctx.fillStyle = '#000';
-        ctx.font = '16px PT Mono';
-        ctx.fillText(currentName, histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD);
       }
+
+      ctx.fillRect(histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD - currentHeight - 16, histogramColumnWidth, currentHeight);
+      ctx.fillStyle = '#000';
+      ctx.font = '16px PT Mono';
+      ctx.fillText(Math.floor(currentTime), histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD - currentHeight - 20);
+      ctx.fillStyle = '#000';
+      ctx.font = '16px PT Mono';
+      ctx.fillText(currentName, histogramColumnStartPositionX, HEIGHT_HISTOGRAM_CLOUD);
 
       histogramColumnStartPositionX += histogramColumnWidth + histogramColumnOffset;
 
