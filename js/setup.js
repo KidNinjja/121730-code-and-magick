@@ -5,7 +5,7 @@
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
-  /*Коды символов*/
+  /* Коды символов */
   var ENTER_KEY_CODE = 13;
   var ESCAPE_KEY_CODE = 27;
 
@@ -19,14 +19,18 @@
   var footerLink = document.querySelector('.footer-link');
   var wizardSettingsPopupFlag = 'invisible';
 
-  /*Установка доболнительных атрибутов для диалогового окна и его элементов*/
+  /* Установка доболнительных атрибутов для диалогового окна и его элементов */
   window.addEventListener('load', function () {
-    popupButtonOpen.setAttribute('role', 'button');
-    popupButtonOpenImage.setAttribute('aria-pressed', 'false');
-    popupButtonOpenImage.setAttribute('tabindex', '1');
-    popupButtonClose.setAttribute('aria-pressed', 'false');
     wizardSettingsPopup.setAttribute('role', 'dialog');
     wizardSettingsPopup.setAttribute('aria-hidden', 'true');
+    popupButtonOpenImage.setAttribute('role', 'button');
+    popupButtonOpenImage.setAttribute('aria-pressed', 'false');
+    popupButtonOpenImage.setAttribute('tabindex', '0');
+    popupInputFiled.setAttribute('tabindex', '1');
+    popupButtonClose.setAttribute('aria-pressed', 'false');
+    popupButtonClose.setAttribute('tabindex', '1');
+    popupSubmitButton.setAttribute('tabindex', '1');
+    footerLink.setAttribute('tabindex', '1');
   });
 
   /* Поле для ввода имени игрока */
@@ -74,14 +78,14 @@
   };
 
   var isActivateEvent = function (event) {
-    return event.keyCode && event.keyCode ===  ENTER_KEY_CODE;
+    return event.keyCode && event.keyCode === ENTER_KEY_CODE;
   };
 
-  var setupKeyDownHendler = function(event) {
+  var setupKeyDownHendler = function (event) {
     if (event.keyCode === ESCAPE_KEY_CODE) {
       wizardSettingsPopup.classList.add(wizardSettingsPopupFlag);
     }
-  }
+  };
 
   var showSetupElement = function () {
     wizardSettingsPopup.classList.remove(wizardSettingsPopupFlag);
@@ -144,8 +148,6 @@
       hideSetupElement();
     }
   });
-
-
 
 
   /* Регистрация события на элементе [МАНТИЯ ПЕРСОНАЖА] */
