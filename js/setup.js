@@ -5,11 +5,33 @@
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
+  /* Коды символов */
+  var ENTER_KEY_CODE = 13;
+  var ESCAPE_KEY_CODE = 27;
+
   /* Элементы всплывающего окна настроек персонажа */
   var popupButtonOpen = document.querySelector('.setup-open');
-  var popupButtonClose = document.querySelector('.setup-close');
+  var popupButtonOpenImage = popupButtonOpen.querySelector('img');
   var wizardSettingsPopup = document.querySelector('.setup');
+  var popupButtonClose = document.querySelector('.setup-close');
+  var popupInputFiled = document.querySelector('.setup-user-name');
+  var popupSubmitButton = document.querySelector('.setup-submit');
+  var footerLink = document.querySelector('.footer-link');
   var wizardSettingsPopupFlag = 'invisible';
+
+  /* Установка доболнительных атрибутов для диалогового окна и его элементов */
+  window.addEventListener('load', function () {
+    wizardSettingsPopup.setAttribute('role', 'dialog');
+    wizardSettingsPopup.setAttribute('aria-hidden', 'true');
+    popupButtonOpenImage.setAttribute('role', 'button');
+    popupButtonOpenImage.setAttribute('aria-pressed', 'false');
+    popupButtonOpenImage.setAttribute('tabindex', '0');
+    popupInputFiled.setAttribute('tabindex', '1');
+    popupButtonClose.setAttribute('aria-pressed', 'false');
+    popupButtonClose.setAttribute('tabindex', '1');
+    popupSubmitButton.setAttribute('tabindex', '1');
+    footerLink.setAttribute('tabindex', '1');
+  });
 
   /* Поле для ввода имени игрока */
   var userNameField = document.querySelector('.setup-user-name');
@@ -55,31 +77,76 @@
     ]
   };
 
+  var isActivateEvent = function (event) {
+    return event.keyCode && event.keyCode === ENTER_KEY_CODE;
+  };
+
+  var setupKeyDownHendler = function (event) {
+    if (event.keyCode === ESCAPE_KEY_CODE) {
+      wizardSettingsPopup.classList.add(wizardSettingsPopupFlag);
+    }
+  };
+
+  var showSetupElement = function () {
+    wizardSettingsPopup.classList.remove(wizardSettingsPopupFlag);
+    document.addEventListener('keydown', setupKeyDownHendler);
+    wizardSettingsPopup.setAttribute('aria-hidden', 'false');
+    userNameField.required = true;
+    userNameField.setAttribute('autofocus', 'autofocus');
+    userNameField.setAttribute('maxlength', userNameFieldMaxLength);
+  };
+
+  var hideSetupElement = function () {
+    wizardSettingsPopup.classList.add(wizardSettingsPopupFlag);
+    wizardSettingsPopup.setAttribute('aria-hidden', 'true');
+    document.removeEventListener('keydown', setupKeyDownHendler);
+  };
 
   /* Регистрация события на элементе всплывающего окна [КНОПКА ОТКРЫТЬ] */
   popupButtonOpen.addEventListener('click', function (event) {
     event.preventDefault();
 
-    wizardSettingsPopup.classList.remove(wizardSettingsPopupFlag);
-    userNameField.required = true;
-    userNameField.setAttribute('autofocus', 'autofocus');
-    userNameField.setAttribute('maxlength', userNameFieldMaxLength);
+    showSetupElement();
+
   });
 
+  popupButtonOpenImage.addEventListener('keydown', function (event) {
+    event.preventDefault();
+    popupButtonOpenImage.setAttribute('aria-pressed', 'true');
+    if (isActivateEvent(event)) {
+      showSetupElement();
+    }
+
+  });
 
   /* Регистрация события на элементе всплывающего окна [КНОПКА ЗАКРЫТЬ] */
   popupButtonClose.addEventListener('click', function (event) {
     event.preventDefault();
 
-    wizardSettingsPopup.classList.add(wizardSettingsPopupFlag);
+    hideSetupElement();
+
   });
 
-
-  /* Регистрация события на элементе всплывающего окна [КНОПКА ЗАКРЫТЬ] */
-  popupButtonClose.addEventListener('click', function (event) {
+  popupButtonClose.addEventListener('keydown', function (event) {
     event.preventDefault();
 
-    wizardSettingsPopup.classList.add(wizardSettingsPopupFlag);
+    if (isActivateEvent(event)) {
+      hideSetupElement();
+    }
+
+  });
+
+  popupSubmitButton.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    hideSetupElement();
+
+  });
+
+  popupSubmitButton.addEventListener('keydown', function (event) {
+    if (isActivateEvent(event)) {
+      hideSetupElement();
+    }
   });
 
 
