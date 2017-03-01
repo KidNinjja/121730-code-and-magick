@@ -48,7 +48,8 @@
       'rgb(56, 159, 117)',
       'rgb(215, 210, 55)',
       'rgb(0, 0, 0)'
-    ]
+    ],
+    baseColor: 'rgb(101, 137, 164)'
   };
 
 
@@ -149,13 +150,15 @@
     }
   });
 
+  colorizeElement(wizardCoatData.element, wizardCoatData.colors, 'style="fill:"');
 
-  /* Регистрация события на элементе [МАНТИЯ ПЕРСОНАЖА] */
-  wizardCoatData.element.addEventListener('click', function (event) {
-    event.preventDefault();
 
-    wizardCoatData.element.attributes.style.value = 'fill: ' + wizardCoatData.colors[getRandomInteger(1, wizardCoatData.colors.length)];
-  });
+  // /* Регистрация события на элементе [МАНТИЯ ПЕРСОНАЖА] */
+  // wizardCoatData.element.addEventListener('click', function (event) {
+  //   event.preventDefault();
+  //
+  //   wizardCoatData.element.attributes.style.value = 'fill: ' + wizardCoatData.colors[getRandomInteger(1, wizardCoatData.colors.length)];
+  // });
 
 
   /* Регистрация события на элементе [ГЛАЗА ПЕРСОНАЖА] */
