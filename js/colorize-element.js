@@ -1,8 +1,17 @@
   'use strict';
 
-  var colorizeElement = function (element, colors, property) {
-    element.addEventListener('click', function(event) {
-      console.dir();
-      element.setAttribute('style', 'fill: ' + colors[utils.getRandomElementExcept(colors, element.style.fill)]);
+  window.colorizeElement = function (element, colors, property) {
+    var elementBaseColor = null;
+
+    element.addEventListener('click', function () {
+      element.setAttribute('style', property + ':' + ' ' + window.utils.getRandomElementExcept(colors, elementBaseColor));
+      elementBaseColor = element.style.fill || element.getAttribute('style').split(': ')[1];
+    }, false);
+
+    element.addEventListener('keydown', function (event) {
+      if (window.isActivateEvent(event)) {
+        element.setAttribute('style', property + ':' + ' ' + window.utils.getRandomElementExcept(colors, elementBaseColor));
+        elementBaseColor = element.style.fill || element.getAttribute('style').split(': ')[1];
+      }
     }, false);
   };
