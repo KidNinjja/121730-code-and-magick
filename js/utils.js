@@ -1,18 +1,18 @@
   'use strict';
 
-  var utils = {
+  window.utils = {
     getRandomElement: function (collection) {
       return Math.floor(Math.random() * (collection.length - 1)) + 1;
     },
-    getRandomElementExcept: function (collection, arrayItem) {
+    getRandomElementExcept: function (collection, arrayItemValue) {
       var newColor = collection[this.getRandomElement(collection)];
-      var currentColor = arrayItem;
-      console.log(newColor);
-      console.log(currentColor);
-      while (currentColor === arrayItem) {
-        currentColor = collection[this.getRandomElement(collection)];
+      var currentColor = arrayItemValue;
+
+      while (!newColor || newColor === currentColor) {
+        newColor = collection[this.getRandomElement(collection)];
       }
 
+      return newColor;
 
     }
   };
