@@ -1,9 +1,5 @@
   'use strict';
 
-  /* Получение случайного числа */
-  var getRandomInteger = function (min, max, flag) {
-    return Math.floor(Math.random() * (max - min)) + min;
-  };
 
   /* Коды символов */
   var ENTER_KEY_CODE = 13;
@@ -14,9 +10,7 @@
   var popupButtonOpenImage = popupButtonOpen.querySelector('img');
   var wizardSettingsPopup = document.querySelector('.setup');
   var popupButtonClose = document.querySelector('.setup-close');
-  var popupInputFiled = document.querySelector('.setup-user-name');
   var popupSubmitButton = document.querySelector('.setup-submit');
-  var footerLink = document.querySelector('.footer-link');
   var wizardSettingsPopupFlag = 'invisible';
 
   /* Установка доболнительных атрибутов для диалогового окна и его элементов */
@@ -25,12 +19,7 @@
     wizardSettingsPopup.setAttribute('aria-hidden', 'true');
     popupButtonOpenImage.setAttribute('role', 'button');
     popupButtonOpenImage.setAttribute('aria-pressed', 'false');
-    popupButtonOpenImage.setAttribute('tabindex', '0');
-    popupInputFiled.setAttribute('tabindex', '1');
     popupButtonClose.setAttribute('aria-pressed', 'false');
-    popupButtonClose.setAttribute('tabindex', '1');
-    popupSubmitButton.setAttribute('tabindex', '1');
-    footerLink.setAttribute('tabindex', '1');
   });
 
   /* Поле для ввода имени игрока */
@@ -48,7 +37,8 @@
       'rgb(56, 159, 117)',
       'rgb(215, 210, 55)',
       'rgb(0, 0, 0)'
-    ]
+    ],
+    baseColor: 'rgb(101, 137, 164)'
   };
 
 
@@ -77,7 +67,7 @@
     ]
   };
 
-  var isActivateEvent = function (event) {
+  window.isActivateEvent = function (event) {
     return event.keyCode && event.keyCode === ENTER_KEY_CODE;
   };
 
@@ -113,7 +103,7 @@
   popupButtonOpenImage.addEventListener('keydown', function (event) {
     event.preventDefault();
     popupButtonOpenImage.setAttribute('aria-pressed', 'true');
-    if (isActivateEvent(event)) {
+    if (window.isActivateEvent(event)) {
       showSetupElement();
     }
 
@@ -130,7 +120,7 @@
   popupButtonClose.addEventListener('keydown', function (event) {
     event.preventDefault();
 
-    if (isActivateEvent(event)) {
+    if (window.isActivateEvent(event)) {
       hideSetupElement();
     }
 
@@ -144,31 +134,13 @@
   });
 
   popupSubmitButton.addEventListener('keydown', function (event) {
-    if (isActivateEvent(event)) {
+    if (window.isActivateEvent(event)) {
       hideSetupElement();
     }
   });
 
+  window.colorizeElement(wizardCoatData.element, wizardCoatData.colors, 'fill');
 
-  /* Регистрация события на элементе [МАНТИЯ ПЕРСОНАЖА] */
-  wizardCoatData.element.addEventListener('click', function (event) {
-    event.preventDefault();
+  window.colorizeElement(wizardEyesData.element, wizardEyesData.colors, 'fill');
 
-    wizardCoatData.element.attributes.style.value = 'fill: ' + wizardCoatData.colors[getRandomInteger(1, wizardCoatData.colors.length)];
-  });
-
-
-  /* Регистрация события на элементе [ГЛАЗА ПЕРСОНАЖА] */
-  wizardEyesData.element.addEventListener('click', function (event) {
-    event.preventDefault();
-
-    wizardEyesData.element.setAttribute('fill', wizardEyesData.colors[getRandomInteger(1, wizardEyesData.colors.length)]);
-  });
-
-
-  /* Регистрация события на элементе [ОГНЕННЫЙ ШАР ПЕРСОНАЖА] */
-  wizardFireballData.element.addEventListener('click', function (event) {
-    event.preventDefault();
-
-    wizardFireballData.element.setAttribute('style', 'background-color:' + wizardFireballData.colors[getRandomInteger(1, wizardFireballData.colors.length)]);
-  });
+  window.colorizeElement(wizardFireballData.element, wizardFireballData.colors, 'background-color');
