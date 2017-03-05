@@ -62,6 +62,11 @@
     };
 
 
+    var focusOpenButton = function () {
+      popupButtonOpenImage.focus();
+    };
+
+
     /* Регистрация события на элементе всплывающего окна [КНОПКА ОТКРЫТЬ] */
     popupButtonOpen.addEventListener('click', function (event) {
       event.preventDefault();
@@ -70,15 +75,18 @@
 
     });
 
+
     popupButtonOpenImage.addEventListener('keydown', function (event) {
       event.preventDefault();
 
       popupButtonOpenImage.setAttribute('aria-pressed', 'true');
+
       if (window.utils.isActivateEvent(event)) {
         window.enableSetup.showSetupElement();
       }
 
     });
+
 
     /* Регистрация события на элементе всплывающего окна [КНОПКА ЗАКРЫТЬ] */
     popupButtonClose.addEventListener('click', function (event) {
@@ -88,14 +96,16 @@
 
     });
 
+
     popupButtonClose.addEventListener('keydown', function (event) {
       event.preventDefault();
 
-      if (window.utils.isDeactivationEvent(event)) {
-        window.enableSetup.hideSetupElement();
+      if (window.utils.isActivateEvent(event)) {
+        window.enableSetup.hideSetupElement(focusOpenButton);
       }
 
     });
+
 
     popupSubmitButton.addEventListener('click', function (event) {
       event.preventDefault();
@@ -108,15 +118,21 @@
       event.preventDefault();
 
       if (window.utils.isActivateEvent(event)) {
-        window.enableSetup.hideSetupElement();
+        window.enableSetup.hideSetupElement(focusOpenButton);
       }
 
     });
 
-    window.setColor(wizardCoatData.element, wizardCoatData.colors, 'fill');
+    window.setColor(wizardCoatData.element, wizardCoatData.colors, function (color) {
+      wizardCoatData.element.setAttribute('style', 'fill' + ':' + ' ' + window.utils.getRandomElementExcept(wizardCoatData.colors, color));
+    });
 
-    window.setColor(wizardEyesData.element, wizardEyesData.colors, 'fill');
+    window.setColor(wizardEyesData.element, wizardEyesData.colors, function (color) {
+      wizardEyesData.element.setAttribute('style', 'fill' + ':' + ' ' + window.utils.getRandomElementExcept(wizardCoatData.colors, color));
+    });
 
-    window.setColor(wizardFireballData.element, wizardFireballData.colors, 'background-color');
+    window.setColor(wizardFireballData.element, wizardFireballData.colors, function (color) {
+      wizardFireballData.element.setAttribute('style', 'background-color' + ':' + ' ' + window.utils.getRandomElementExcept(wizardCoatData.colors, color));
+    });
 
   }());

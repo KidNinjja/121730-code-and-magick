@@ -25,7 +25,6 @@
       while (!newColor || newColor === currentColor) {
         newColor = collection[getRandomElement(collection)];
       }
-
       return newColor;
 
     };

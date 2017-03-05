@@ -7,6 +7,8 @@
     var userNameField = document.querySelector('.setup-user-name');
     var userNameFieldMaxLength = 50;
 
+    var onSetupClose = null;
+
     var setupKeyDownHendler = function (event) {
       if (window.utils.isDeactivationEvent(event)) {
         wizardSettingsPopup.classList.add('invisible');
@@ -22,11 +24,19 @@
       userNameField.setAttribute('maxlength', userNameFieldMaxLength);
     };
 
-    var hideSetupElement = function () {
+    var hideSetupElement = function (cb) {
       wizardSettingsPopup.classList.add('invisible');
       wizardSettingsPopup.setAttribute('aria-hidden', 'true');
       document.removeEventListener('keydown', setupKeyDownHendler);
+
+      onSetupClose = cb;
+
+      if (typeof onSetupClose === 'function') {
+        onSetupClose();
+      }
+
     };
+
 
     return {
       showSetupElement: showSetupElement,
