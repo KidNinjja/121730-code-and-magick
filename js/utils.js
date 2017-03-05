@@ -22,10 +22,11 @@
       var newColor = collection[getRandomElement(collection)];
       var currentColor = arrayItemValue;
 
+      console.log(currentColor);
+
       while (!newColor || newColor === currentColor) {
         newColor = collection[getRandomElement(collection)];
       }
-
       return newColor;
 
     };
