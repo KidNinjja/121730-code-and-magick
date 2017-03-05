@@ -118,20 +118,21 @@
       event.preventDefault();
 
       if (window.utils.isActivateEvent(event)) {
+        popupButtonOpenImage.setAttribute('aria-pressed', 'false');
         window.enableSetup.hideSetupElement(focusOpenButton);
       }
 
     });
 
-    window.setColor(wizardCoatData.element, wizardCoatData.colors, function (color) {
+    window.colorizeElement(wizardCoatData.element, wizardCoatData.colors, function (color) {
       wizardCoatData.element.setAttribute('style', 'fill' + ':' + ' ' + window.utils.getRandomElementExcept(wizardCoatData.colors, color));
     });
 
-    window.setColor(wizardEyesData.element, wizardEyesData.colors, function (color) {
+    window.colorizeElement(wizardEyesData.element, wizardEyesData.colors, function (color) {
       wizardEyesData.element.setAttribute('style', 'fill' + ':' + ' ' + window.utils.getRandomElementExcept(wizardCoatData.colors, color));
     });
 
-    window.setColor(wizardFireballData.element, wizardFireballData.colors, function (color) {
+    window.colorizeElement(wizardFireballData.element, wizardFireballData.colors, function (color) {
       wizardFireballData.element.setAttribute('style', 'background-color' + ':' + ' ' + window.utils.getRandomElementExcept(wizardCoatData.colors, color));
     });
 

@@ -1,8 +1,8 @@
   'use strict';
 
-  window.setColor = (function () {
+  window.colorizeElement = (function () {
 
-    var colorizeElement = function (element, colors, cb) {
+    var setEvent = function (element, colors, cb) {
       var elementBaseColor = null;
 
       element.addEventListener('click', function () {
@@ -18,6 +18,6 @@
       }, false);
     };
 
-    return colorizeElement;
+    return setEvent;
 
   }());
