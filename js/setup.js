@@ -62,8 +62,8 @@
     };
 
 
-    var focusOpenButton = function() {
-      popupButtonOpenImage.focus()
+    var focusOpenButton = function () {
+      popupButtonOpenImage.focus();
     };
 
 
