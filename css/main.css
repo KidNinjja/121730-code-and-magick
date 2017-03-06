@@ -540,7 +540,7 @@ input[type=radio]:checked + .review-mark-label {
 }
 
 .setup {
-  width: 800px;
+  width: 900px;
   height: 600px;
 
   position: fixed;
@@ -614,21 +614,26 @@ input[type=radio]:checked + .review-mark-label {
   transform: translateY(-0.3em);
 }
 
+.setup-similar {
+  position: absolute;
+  top: 70px;
+}
+
 .setup-wizard {
   width: 250px;
   height: 250px;
 
   position: absolute;
   bottom: 150px;
-  left: 50px;
+  left: 210px;
 
   border-bottom: solid 15px #1cb34d;
 }
 
 .setup-fireball-wrap {
   position: absolute;
-  left: 300px;
-  top: 130px;
+  left: 430px;
+  top: 90px;
 
   width: 75px;
   height: 75px;
@@ -646,7 +651,7 @@ input[type=radio]:checked + .review-mark-label {
 .setup-artifacts {
   position: absolute;
   bottom: 170px;
-  left: 460px;
+  left: 550px;
 
   display: flex;
   flex-wrap: wrap;
